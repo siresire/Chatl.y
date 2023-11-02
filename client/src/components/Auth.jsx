@@ -6,12 +6,27 @@ import signinImage from '../assets/signup.jpg';
 
 const cookies = new Cookies();
 
+const initialState = {
+    fullName: '',
+    username: '',
+    password: '',
+    confirmPassword: '',
+    phoneNumber: '',
+    avatarURL: '',
+}
+
 function Auth() {
-    const [form, setForm] = useState(false);
+    const [form, setForm] = useState(initialState);
     const [isSignup, setIsSignup] = useState(true);
 
     const handleChange = (e) => {
         setForm({ ...form, [e.target.name]: e.target.value });
+
+        console.log(form);
+    }
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
     }
 
     const switchMode = () => {
@@ -24,7 +39,7 @@ function Auth() {
             <div className="auth__form-container_fields">
                 <div className="auth__form-container_fields-content">
                     <p>{isSignup ? 'Sign Up' : 'Sign In'}</p>
-                    <form onSubmit={() => { }}>
+                    <form onSubmit={handleSubmit}>
                         {isSignup && (
                             <div className="auth__form-container_fields-content_input">
                                 <label htmlFor="fullName">Full Name</label>
